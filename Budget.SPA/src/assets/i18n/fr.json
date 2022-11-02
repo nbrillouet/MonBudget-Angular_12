@@ -1,0 +1,39 @@
+{
+    "navigation": {
+        "referential": {
+            "title": "Referentiel",
+            "subTitle": "Référentiel de votre bugdet"
+        },
+        "import": {
+            "title": "Import relevés bancaires",
+            "subTitle": "vos imports de relevés bancaires"
+        },
+        "bank": {
+            "title": "Banques",
+            "subTitle": "Vos comptes bancaires"
+        },
+        "plan": {
+            "title": "Budget",
+            "subTitle": "Vos budgets"
+        }
+    },
+    "user": {
+        "signed-in-as": "Connecté en tant que:",
+        "profile": "Profil",
+        "settings": "Paramètres",
+        "status": "Statut",
+        "signed-out": "Déconnexion",
+        "status-option": {
+            "online": "En ligne",
+            "away": "Absent",
+            "busy": "Occupé",
+            "invisible": "Invisible"
+        }
+    },
+    "profile": {
+        "about-me": "A propos de moi"
+    },
+    "welcome-back": "Bienvenue",
+    "Project": "Projet",
+    "Analytics": "Analyses"
+}

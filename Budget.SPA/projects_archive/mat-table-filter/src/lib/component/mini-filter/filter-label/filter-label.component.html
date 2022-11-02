@@ -1,0 +1,33 @@
+<form name="labelForm" 
+  [formGroup]="labelForm" 
+  class="content-mini-filter" 
+  fxLayout="column" fxFlex>
+    <mat-form-field (click)="$event.stopPropagation()">
+      <input type="string" 
+        placeholder="recherche"
+        formControlName="label" 
+        matInput>
+      <button mat-icon-button matSuffix (click)="clear()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+</form>
+
+
+<!-- <div class="content-filter"
+  (click)="$event.stopPropagation()"
+  (keyup)="$event.stopPropagation()" 
+  (keydown)="$event.stopPropagation()">
+  <form name="labelForm" [formGroup]="labelForm" class="product w-100-p" fxLayout="column" fxFlex>
+    <mat-form-field class="w-100-p">
+      <input type="string" formControlName="label" matInput placeholder="contient">
+    </mat-form-field>
+    
+    <button mat-raised-button 
+      class="save-product-button mat-white-bg mt-16 mt-sm-0"
+      [disabled]= "labelForm.invalid || labelForm.pristine"
+      (click)="applyFilter()">
+        <span>APPLIQUER</span>
+    </button>
+  </form>
+</div> -->

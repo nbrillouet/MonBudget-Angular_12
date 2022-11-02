@@ -1,0 +1,96 @@
+<mat-table class="products-table"
+                matSort 
+                (matSortChange)="onSortChangeEvent($event)" 
+                #table [dataSource]="dataSource"
+                [@animateStagger]="{value:'50'}"
+                fusePerfectScrollbar>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.id}}</p>
+                    </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="userName">
+                    <mat-header-cell *matHeaderCellDef>Pseudo</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.userName}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="lastName">
+                    <mat-header-cell *matHeaderCellDef>Nom</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.lastName}}</p>
+                    </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="firstName">
+                    <mat-header-cell *matHeaderCellDef>Prénom</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.firstName}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="city">
+                    <mat-header-cell *matHeaderCellDef>Ville</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.city}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="postalCode">
+                    <mat-header-cell *matHeaderCellDef>Code Postal</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.postalCode}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="country">
+                    <mat-header-cell *matHeaderCellDef>Pays</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.country}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="gender">
+                    <mat-header-cell *matHeaderCellDef>Sexe</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.gender}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="age">
+                    <mat-header-cell *matHeaderCellDef>Age</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.age}}</p>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="dateCreated">
+                    <mat-header-cell *matHeaderCellDef>Date Création</mat-header-cell>
+                    <mat-cell *matCellDef="let user">
+                        <p class="text-truncate">{{user.dateCreated}}</p>
+                    </mat-cell>
+                </ng-container>
+                <!-- Avatar Column
+                <ng-container cdkColumnDef="avatar">
+                    <mat-header-cell *cdkHeaderCellDef></mat-header-cell>
+                    <mat-cell *cdkCellDef="let user">
+                        <img class="avatar"
+                                *ngIf="user.avatar" [alt]="user.userName"
+                                [src]="user.avatar"/>
+                        <img *ngIf="!user.avatar" [src]="'assets/images/ecommerce/product-image-placeholder.png'">
+                    </mat-cell>
+                </ng-container> -->
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  
+                <mat-row *cdkRowDef="let user; columns: displayedColumns;"
+                    class="product"
+                    matRipple
+                    [routerLink]="'/apps/users/'+user.id">
+                </mat-row>
+            </mat-table>

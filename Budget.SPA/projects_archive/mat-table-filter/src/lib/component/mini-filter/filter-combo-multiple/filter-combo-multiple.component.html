@@ -1,0 +1,54 @@
+<!-- <div class="content-filter"
+  (click)="$event.stopPropagation()" 
+  (keyup)="$event.stopPropagation()" 
+  (keydown)="$event.stopPropagation()"> -->
+    <!-- <form name="comboMultipleForm" 
+      [formGroup]="comboMultipleForm" 
+      class="product w-100-p" fxLayout="column" fxFlex>
+      <mat-form-field class="w-100-p">
+          <mat-select class="mini-select" formControlName="comboMultiple" 
+            [compareWith]="compareObjects"
+            multiple
+            placeholder={{filterComboMultiple.placeholder}} >
+            <mat-option *ngFor="let item of filterComboMultiple.combos.list" [value]="item">
+              {{ item.label }}
+            </mat-option>
+          </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button 
+        class="save-product-button mat-white-bg mt-16 mt-sm-0"
+        [disabled]= "comboMultipleForm.invalid || comboMultipleForm.pristine"
+        (click)="applyFilter()"
+      >
+        <span>APPLIQUER</span>
+      </button>
+    </form> -->
+  <!-- </div> -->
+
+  <form *ngIf="filterComboMultiple" name="comboMultipleForm" [formGroup]="comboMultipleForm" fxLayout="column" fxFlex>
+    <!-- (selectionChange)="selectionChange($event)" -->
+    <mat-selection-list 
+      #mySelection 
+      formControlName="comboMultiple"
+      class="mini-select"
+      [compareWith]="compareObjects"
+      (click)="$event.stopPropagation()">
+        <mat-list-option *ngFor="let item of filterComboMultiple?.combos?.list" checkboxPosition="'before'" [value]="item">
+          <!-- <span> -->
+            {{ item.label }}
+          <!-- </span> -->
+            <!-- <span style="width:fit-content"
+                  [style.color]="column?.columnConst?.dataSource?.pipeColor ? 'white':''"
+                  [style.padding]="column?.columnConst?.dataSource?.pipeColor ? '2px 6px':''"
+                  [style.backgroundColor]="item.label | customPipe:column?.columnConst?.dataSource?.pipeColor:'SecurityContext.STYLE'">
+                {{item.label | customPipe: column?.columnConst?.dataSource?.pipe}}
+            </span> -->
+
+        </mat-list-option>
+    </mat-selection-list>
+
+  </form>
+
+
+

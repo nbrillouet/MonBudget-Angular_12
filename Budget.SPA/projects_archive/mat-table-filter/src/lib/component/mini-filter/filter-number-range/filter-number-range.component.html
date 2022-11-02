@@ -1,0 +1,52 @@
+<!-- <div class="content-filter"
+  (click)="$event.stopPropagation()"
+  (keyup)="$event.stopPropagation()" 
+  (keydown)="$event.stopPropagation()">
+
+  <form name="numberRangeForm" [formGroup]="numberRangeForm" class="product w-100-p" fxLayout="column" fxFlex>
+    <mat-form-field class="w-100-p">
+      <input type="number" formControlName="numberMin" matInput placeholder="{{filterNumberRange.placeholder}} min">
+      <mat-icon *ngIf="filterNumberRange.suffixIcon" style="font-size:12px;" matSuffix>{{filterNumberRange.suffixIcon}}</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="w-100-p">
+      <input type="number" formControlName="numberMax" matInput placeholder="{{filterNumberRange.placeholder}} max">
+      <mat-icon *ngIf="filterNumberRange.suffixIcon" style="font-size:12px;" matSuffix>{{filterNumberRange.suffixIcon}}</mat-icon>
+    </mat-form-field>
+    
+    <button mat-raised-button 
+      class="save-product-button mat-white-bg mt-16 mt-sm-0"
+      [disabled]= "numberRangeForm.invalid || numberRangeForm.pristine"
+      (click)="applyFilter()">
+        <span>APPLIQUER</span>
+    </button>
+  </form>
+  
+</div> -->
+
+<form name="numberRangeForm" 
+  [formGroup]="numberRangeForm" 
+  class="content-mini-filter" 
+  fxLayout="column" fxFlex>
+    <mat-form-field (click)="$event.stopPropagation()">
+      <input type="number" 
+        placeholder="valeur min"
+        formControlName="numberMin" 
+        matInput
+        (focusout)="onFocusOut()" >
+      <button mat-icon-button matSuffix (click)="clearMin()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field (click)="$event.stopPropagation()">
+      <input type="number" 
+        placeholder="valeur max"
+        formControlName="numberMax" 
+        (focusout)="onFocusOut()"
+        matInput>
+      <button mat-icon-button matSuffix (click)="clearMax()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+</form>

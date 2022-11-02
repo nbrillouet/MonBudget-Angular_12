@@ -1,0 +1,12 @@
+<!-- [style.visibility]="!onloading ? 'visible' : 'hidden'" -->
+<mat-paginator
+
+    *ngIf="(matTableFilter.filterSelected$ | async)?.selected?.pagination && (matTableFilter.table$ | async)?.loader['datas']?.loaded"
+
+    [pageIndex]="(matTableFilter.filterSelected$ | async).selected?.pagination.currentPage"
+    [length]="(matTableFilter.filterSelected$ | async).selected?.pagination.totalItems"
+    [pageSize]="(matTableFilter.filterSelected$ | async).selected?.pagination.nbItemsPerPage"
+    [pageSizeOptions]="[15, 100, 200]"
+
+    (page)="onPageChangeEvent($event)">
+</mat-paginator>

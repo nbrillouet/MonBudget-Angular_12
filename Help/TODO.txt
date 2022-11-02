@@ -1,0 +1,9 @@
+-il peut y avoir 2 retrait identique sur meme journee
+-operations: le defilement ne marche plus
+-ajout compte: ne marche pas.
+-detail account statement : ne marche pas: refaire detail
+-2 imports a la suite--> fichier locké
+-page des import: chargement onglet incorrect
+-refaire les gestions erreurs comme dans OGR
+-ajouter reference lors de la recherche de doublon, faire une ref auto pour credit agricole
+-import: lors de modification (operation inconnu) la date d'integration change anormalement

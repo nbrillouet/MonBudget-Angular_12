@@ -1,0 +1,19 @@
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Import/write your custom styles here.
+/*  @ Styles from this file will override 'vendors.scss' and Fuse's base styles.
+/* ----------------------------------------------------------------------------------------------------- */
+
+
+//==============================================================
+//========          SIMPLE NOTIFICATION             ============
+//==============================================================
+.simple-notification-wrapper{
+    width: 400px;
+}
+.simple-notification {
+    font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+    .sn-title {
+        line-height: 20px !important;
+        font-size: 10px !important;
+    }
+}

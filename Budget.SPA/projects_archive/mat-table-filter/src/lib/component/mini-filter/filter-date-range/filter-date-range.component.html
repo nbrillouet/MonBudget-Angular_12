@@ -1,0 +1,26 @@
+<form name="dateRangeForm"
+  [formGroup]="dateRangeForm"
+  class="content-mini-filter"
+  fxLayout="column" fxFlex>
+    <mat-form-field (click)="$event.stopPropagation()">
+      <!-- [matDatepickerFilter]="datepickerFilterMin" -->
+      <input matInput
+        placeholder="date min"
+        formControlName="dateRangeMin"
+        [matDatepicker]="matDatepickerMin" readonly>
+      <mat-datepicker-toggle matSuffix [for]="matDatepickerMin"></mat-datepicker-toggle>
+      <mat-datepicker #matDatepickerMin disabled="false"></mat-datepicker>
+      <button mat-icon-button matSuffix (click)="clearMin()"><mat-icon>clear</mat-icon></button>
+    </mat-form-field>
+
+    <mat-form-field (click)="$event.stopPropagation()">
+      <!-- [matDatepickerFilter]="datepickerFilterMax"  -->
+      <input matInput
+        placeholder="date max"
+        formControlName="dateRangeMax"
+        [matDatepicker]="matDatepickerMax" readonly>
+      <mat-datepicker-toggle matSuffix [for]="matDatepickerMax"></mat-datepicker-toggle>
+      <mat-datepicker #matDatepickerMax disabled="false"></mat-datepicker>
+      <button mat-icon-button matSuffix (click)="clearMax()"><mat-icon>clear</mat-icon></button>
+    </mat-form-field>
+</form>

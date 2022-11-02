@@ -1,0 +1,40 @@
+{
+    "navigation": {
+        "referential": {
+            "title": "Referential",
+            "subTitle": "Your budget's referential"
+        },
+        "import": {
+            "title": "Account statements import",
+            "subTitle": "Your account statements"
+        },
+        "bank": {
+            "title": "Banks",
+            "subTitle": "Your banks accounts"
+        },
+        "plan": {
+            "title": "Plans",
+            "subTitle": "Your plans"
+        }
+    },
+    "user": {
+        "signed-in-as": "Signed in as:",
+        "profile": "Profile",
+        "settings": "Settings",
+        "status": "Status",
+        "signed-out": "Sign out",
+        "status-option": {
+            "online": "Online",
+            "away": "Away",
+            "busy": "Busy",
+            "invisible": "Invisible"
+        }
+    },
+    "profile": {
+        "about-me": "About Me"
+    },
+
+    "welcome-back": "Welcome back",
+    "Project": "Project",
+    "Analytics": "Analytics"
+}

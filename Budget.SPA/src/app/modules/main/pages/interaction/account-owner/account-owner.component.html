@@ -1,0 +1,43 @@
+<div id="mail-confirm" fxLayout="column">
+
+    <div id="mail-confirm-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+
+        <div id="mail-confirm-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+
+            <div class="logo">
+                <mat-icon class="mat-accent s-96">link</mat-icon>
+            </div>
+
+            <div class="title">Partage de compte</div>
+            <br>
+            <ng-container *ngIf="(accountOwner$ | async).loader['response-account-owner'].loaded else tp_progress">
+                <div class="subtitle">
+                    <p>
+                        Votre réponse a bien été prise en compte.
+                    </p>
+                    <!-- TODO async non correct -->
+                    <!-- <p *ngIf="(accountOwner$ | async).loader['response-account-owner'].loaded">
+                        Vous avez <b>{{ (accountOwner$ | async)?.datas.enumActivationCode===1 ? 'autorisé' : 'refusé' }}</b> le partage du compte numero: {{ (accountOwner$ | async)?.datas.account.number }} <br>
+                        avec l'utilisateur : {{ (accountOwner$ | async)?.datas.userCaller.firstName }} {{ (accountOwner$ | async)?.datas.userCaller.lastName }}
+                    </p> -->
+                </div>
+                <div class="message">
+                    <a class="link" [routerLink]="'/pages/auth/login'">Connexion Mon Budget</a>
+                </div>
+
+            </ng-container>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<ng-template #tp_progress>
+    chargement...
+    <mat-progress-bar
+        color="primary"
+        mode="indeterminate">
+    </mat-progress-bar>
+</ng-template>

@@ -1,0 +1,203 @@
+<!-- content-card" fxLayout="column" fxLayoutAlign="space-between" -->
+<div class="">
+    <mat-table-filter-toolbar
+        *ngIf="matTableFilter?.toolbar"
+        [checkboxesDelete]="checkboxesDelete"
+        [toolbar]="matTableFilter.toolbar"
+        (addItemEvent)="addItem()"
+        (deleteItemsEvent)="deleteItems($event)">
+    </mat-table-filter-toolbar>
+
+        <!-- resizeObserver (resize)="onResize($event)" -->
+        <mat-table *ngIf="matTableFilter?.columns"
+          [dataSource]="dataSource"
+          cdkDropListGroup
+          matSort
+          [matSortActive]="matTableFilter.columns[0].field"
+          matSortDirection="asc"
+          matSortDisableClear
+          (matSortChange)="onSortChangeEvent($event)"
+          resizeObserver (resize)="onResize($event)"
+        >
+
+        <ng-container *ngFor="let column of matTableFilter.columns; let i = index" [matColumnDef]="column.field">
+          <mat-header-cell *matHeaderCellDef>
+              <!-- SORTABLE / NOT SORTABLE-->
+              <ng-container *ngIf="column.isSortable ; else noSortable">
+                <div mat-sort-header>{{ column.label }}</div>
+              </ng-container>
+
+              <ng-template #noSortable>
+                <div>{{ column.label }}</div>
+              </ng-template>
+
+              <span *ngIf="column.filter.type===enumFilterType.label
+                || column.filter.type===enumFilterType.dateRange
+                || column.filter.type===enumFilterType.numberRange
+                || column.filter.type===enumFilterType.comboMultiple
+                || column.filter.type===enumFilterType.comboMultipleGroup
+                || column.filter.type===enumFilterType.label">
+
+                <span (click)="templateFor='colLabel'; $event.stopPropagation()" [matMenuTriggerFor]="menuLabel" style="cursor: pointer;" fxFlex fxLayoutAlign="end start">
+                <mat-icon [ngStyle]="{'color':filterIsEmpty(column.filter) ? '#E0E0E0' : 'red'}">filter_list</mat-icon>
+                </span>
+
+                  <mat-menu
+                    #menuLabel="matMenu"
+                    class="menu-filter"
+                    [overlapTrigger]="false"
+                    [ngSwitch]="column.filter.type">
+
+                    <!-- filter COMBO MULTIPLE -->
+                    <lib-filter-combo-multiple
+                      *ngSwitchCase="enumFilterType.comboMultiple"
+                      [filterComboMultiple]="column.filter.datas"
+                      (applyFilterComboMultiple)="applyFilter(column,$event)">
+                    </lib-filter-combo-multiple>
+
+                    <!-- filter COMBO MULTIPLE GROUP-->
+                    <lib-filter-combo-multiple-group
+                      *ngSwitchCase="enumFilterType.comboMultipleGroup"
+                      [filterComboMultipleGroup]="column.filter.datas"
+                      (applyFilterComboMultipleGroup)="applyFilter(column,$event)">
+                    </lib-filter-combo-multiple-group>
+
+                    <!-- filter DATE RANGE-->
+                    <lib-filter-date-range
+                      *ngSwitchCase="enumFilterType.dateRange"
+                      [filterDateRange]="column.filter.datas"
+                      (applyFilterDateRange)="applyFilter(column,$event)">
+                    </lib-filter-date-range>
+
+                    <!-- filter NUMBER RANGE-->
+                    <lib-filter-number-range
+                      *ngSwitchCase="enumFilterType.numberRange"
+                      [filterNumberRange]="column.filter.datas"
+                      (applyFilter)="applyFilter(column,$event)">
+                    </lib-filter-number-range>
+
+                    <!-- filter LABEL-->
+                    <filter-label
+                      *ngSwitchCase="enumFilterType.label"
+                      [filterLabel]="column.filter.datas"
+                      (applyLabelFilter)="applyFilter(column,$event)">
+                    </filter-label>
+
+                  </mat-menu>
+
+              </span>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row">
+              <ng-container [ngSwitch]="column.style.type">
+                <!-- STYLE: DOT-DATAS -->
+                <div *ngSwitchCase="enumStyleType.dotDatas">
+                  <mat-chip-list>
+                    <mat-chip class="mini-select"  *ngFor="let dot of row[column.field]"
+                      [matTooltip]="dot.id + ': ' + dot.label"
+                      [ngStyle]="{'background-color':dot.code }">
+                    </mat-chip>
+                  </mat-chip-list>
+                </div>
+
+                <!-- STYLE: DOT-BOOL -->
+                <div *ngSwitchCase="enumStyleType.dotBool">
+                  <mat-chip-list>
+                    <mat-chip
+                      class="mini-select"
+                      [matTooltip]="row[column.field]"
+                      [ngStyle]="{'background-color':row[column.field] ? '#EB4D4D' : '#0D9FE6' }"
+                    >
+                    </mat-chip>
+                  </mat-chip-list>
+
+                <!-- <mat-chip color="primary" selected>Primary fish</mat-chip></mat-chip-list> -->
+
+                </div>
+
+                <!-- STYLE: IMAGE -->
+                <div *ngSwitchCase="enumStyleType.image">
+                  <img
+                    class="avatar small"
+                    [src]="row[column.field]"
+                  >
+                </div>
+
+                <!-- STYLE: NUMBER-UP-DOWN -->
+                <div *ngSwitchCase="enumStyleType.numberUpDown">
+                    <div *ngIf="row[column.field]>column.style.datas.isoNumber">
+                        <p  class="text-truncate green-fg">
+                            <mat-icon class="green-fg mr-2">trending_up</mat-icon>
+                            {{row[column.field]}}
+                        </p>
+                    </div>
+                    <div *ngIf="row[column.field]<column.style.datas.isoNumber">
+                        <p  class="text-truncate red-fg">
+                            <mat-icon class="red-fg mr-2">trending_down</mat-icon>
+                            {{row[column.field]}}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- STYLE: LABEL -->
+                <div class="text-truncate" *ngSwitchCase="enumStyleType.label">
+                  <div class="text-truncate" *ngIf="column.pipe">{{ row[column.field] | dateFormat:'mm/mm/mm' }}</div>
+                  <div class="text-truncate" *ngIf="!column.pipe">{{ row[column.field]  }} </div>
+                </div>
+
+                <!-- STYLE: BUTTON-ICON -->
+                <div *ngSwitchCase="enumStyleType.buttonIcon">
+                    <button [matTooltip]="row[column.field].tooltip" mat-icon-button (click)="onClickButtonIcon(row);$event.stopPropagation()">
+                        <!-- <mat-icon color="warn">{{column.style.datas.icon}}</mat-icon> -->
+                        <mat-icon [color]="row[column.field].color">{{row[column.field].icon}}</mat-icon>
+                    </button>
+                </div>
+
+                <!-- STYLE: CHECKBOX -->
+                <div *ngSwitchCase="enumStyleType.checkboxDelete">
+                  <mat-checkbox
+                    [disabled]="row['isUsed']"
+                    (change)="onCheckboxDeleteChange($event,row['id'])"
+                    (click)="$event.stopPropagation()">
+                  </mat-checkbox>
+                </div>
+              </ng-container>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
+
+        <mat-row
+          (mousedown)="onMouseDown($event)"
+          (click)="onClickLigne($event, index, row)"
+          *matRowDef="let row; columns: displayedColumns; index as index"
+          [ngClass]="index===activeClick?'active-click':'inactive-click'">
+        </mat-row>
+      </mat-table>
+
+    <div *ngIf="onloading"
+      class="w-100-p"
+      fxLayout="column"
+      fxLayoutAlign="center center">
+      <mat-progress-bar
+        color="warn"
+        mode="indeterminate">
+      </mat-progress-bar>
+    </div>
+
+    <p class="empty-result"
+        *ngIf="!onloading && rows && rows.length===0">
+        Aucun résultat
+    </p>
+  </div>
+
+    <!-- <mat-paginator
+        class="h-19"
+        *ngIf="filterSelected && filterSelected['pagination'] && matTableFilter.columns && rows && rows.length>0"
+        [style.visibility]="!onloading ? 'visible' : 'hidden'"
+        (page)="onPageChangeEvent($event)"
+        [length]="filterSelected['pagination'].totalItems"
+        [pageSize]="filterSelected['pagination'].nbItemsPerPage"
+        [pageSizeOptions]="[15, 100, 200]">
+    </mat-paginator> -->
+

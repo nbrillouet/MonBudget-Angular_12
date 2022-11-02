@@ -1,0 +1,56 @@
+@import '~@angular/material/theming';
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+
+
+// // Define the palettes for your theme using the Material Design palettes available in palette.scss
+// // (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// // hue. Available color palettes: https://material.io/design/color/
+// $app-primary: mat-palette($mat-blue);
+// $app-accent:  mat-palette($mat-orange);
+// $app-warn:    mat-palette($mat-red);
+// $app-success: mat-palette($mat-light-green);
+
+// // Create the theme object (a Sass map containing all of the palettes).
+// $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+// // Include theme styles for core and each component used in your app.
+// // Alternatively, you can import and @include the theme mixins for each component
+// // that you are using.
+// @include angular-material-theme($app-theme);
+
+// $primary: map-get($app-theme, primary);
+// $accent: map-get($app-theme, accent);
+
+// :root {
+//   --color-post: #{mat-color($primary)};
+//   --color-primary: #{mat-color($app-primary)};
+//   --color-accent: #{mat-color($app-accent)};
+//   --color-warn: #{mat-color($app-warn)};
+//   --color-success: #{mat-color($app-success)};
+// }
+
+
+@import '~@angular/material/theming';
+// Theme configuration
+$primary: mat-palette($mat-indigo);
+$accent:  mat-palette($mat-pink, A200, A100, A400);
+$warn: mat-palette($mat-red);
+
+// $theme: mat-light-theme($primary, $accent, $warn);
+
+// // Import material theming functions
+// @import '~@angular/material/theming';
+
+// // Copy the palettes from your selected theme (usually theme.scss).
+// $app-primary: mat-palette($mat-grey);
+// $app-accent:  mat-palette($mat-light-blue);
+// $app-warn:    mat-palette($mat-pink);
+
+// // Create your Sass color vars (will be available in all the project)
+// $primary: mat-color($app-primary);
+// $accent: mat-color($app-accent);
+// $warn: mat-color($app-warn);

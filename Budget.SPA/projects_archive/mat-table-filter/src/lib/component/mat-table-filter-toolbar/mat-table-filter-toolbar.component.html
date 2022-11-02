@@ -1,0 +1,55 @@
+<!-- class="w-100-p pl-20" -->
+<div style="background-color:#F5F5F5; ">
+
+    <!-- fxFlex="1 0 auto" fxFlex="row" fxLayoutAlign="start center" -->
+  <div >
+    <!-- ADD BUTTON -->
+    <ng-container *ngIf="toolbar?.buttonAdd?.enabled">
+        <!-- fxFlex="50px" -->
+        <button
+
+        color="accent"
+        (click)="addItem()"
+        mat-icon-button
+        [matTooltip]="toolbar?.buttonAdd?.tooltip ? toolbar.buttonAdd.tooltip : 'Ajouter un élément'" >
+        <mat-icon>add</mat-icon>
+      </button>
+    </ng-container>
+
+    <!-- DELETE BUTTON -->
+    <ng-container *ngIf=toolbar?.buttonDelete?.enabled>
+      <button *ngIf="checkboxesDelete.length>0"
+        color="accent"
+        (click)="deleteItems()"
+        mat-icon-button
+        [matTooltip]="toolbar?.buttonDelete?.tooltip ? toolbar.buttonDelete.tooltip + ' (' + checkboxesDelete.length + ' élément(s))' : 'Supprimer le(s) élément(s) sélectionné(s)'">
+
+        <mat-icon [matBadge]="checkboxesDelete.length" matBadgeColor="warn" matBadgeSize="small">delete</mat-icon>
+      </button>
+
+      <button *ngIf="checkboxesDelete.length===0"
+        disabled
+        [ngStyle]="{'color':'#5B5B5B'}"
+        mat-icon-button>
+
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-container>
+  </div>
+
+  <!-- fxFlex="1 0 auto" fxFlex="row" fxLayoutAlign="end center" -->
+  <div >
+    <!-- FULLSCREEN BUTTON -->
+    <ng-container *ngIf=toolbar?.buttonFullscreen?.enabled>
+        <!-- fxFlex="50px" -->
+        <button
+          mat-icon-button
+          color="accent"
+          (click)="toggleFullscreen()"
+          matTooltip="plein écran">
+          <mat-icon *ngIf="!fuseConfig.layout.toolbar.fullscreen">fullscreen</mat-icon>
+          <mat-icon *ngIf="fuseConfig.layout.toolbar.fullscreen">fullscreen_exit</mat-icon>
+      </button>
+    </ng-container>
+  </div>
+</div>
